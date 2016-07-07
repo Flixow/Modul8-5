@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Daniel Siwek</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="script.js"></script>
+</head>
+<body>
+
+	<button class="btn btn-success" onClick="newGame();">New game</button>
+
+	<button class="btn btn-default pick-button" onclick="playerPick('rock')">
+	    Rock <i class="fa fa-hand-rock-o" aria-hidden="true"></i>
+	</button>
+	<button class="btn btn-default pick-button" onclick="playerPick('paper')">
+	    Paper <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+	</button>
+	<button class="btn btn-default pick-button" onclick="playerPick('scissors')">
+	    Scissors <i class="fa fa-hand-scissors-o" aria-hidden="true"></i>
+	</button>
+
+	<h3>Current round</h3> <br>
+  Computer picked <span id="computerPick"></span> <br>
+  Player picked <span id="playerPick"></span> <br>
+  Result: <span id="gameResult"></span>
+
+	<table class="table table-bordered table-striped">
+	  <thead>
+	    <tr>
+	      <th colspan="2" class="text-center">Game results</th>
+	    </tr>
+	    <tr>
+	      <th id="playerName">Player</th>
+	      <th>Computer</th>
+	    </tr>
+	  </thead>
+	  <tbody><tr>
+	    <td id="playerScore">0</td>
+	    <td id="computerScore">0</td>
+	  </tr></tbody>
+	</table>
+
+	<p id="roundResult"></p>
+
+</body>
+</html>

@@ -26,17 +26,19 @@ function newGame() {
 	player.name = prompt("Witaj, jak Ci na imię?", "Default Player Name");
 	document.getElementById('playerName').innerHTML = player.name;
 
-	var buttons = document.getElementsByClassName("pick-button");
-	  for(var i = 0; i < buttons.length; i++) {
-	    buttons[i].style.visibility = 'visible';
-	};
+	const buttons = document.getElementsByClassName("pick-button");
+	const buttonsLength = buttons.length;
+
+	for(var i = 0; i < buttonsLength; i++) {
+		buttons[i].style.visibility = 'visible';
+	}
 
 }
 
 function playerPick(pick) {
   player.pick = pick;
   computerPick(); //choose computer's pick
-  checkResult(); //check result
+  checkRoundResult(); //check result
 }
 
 function computerPick() {
@@ -54,8 +56,7 @@ function computerPick() {
   }
 }
 
-function checkResult() {
-  //Check if there is a tie
+function checkRoundResult() {
   var gameResult;
 	if (player.pick === computer.pick) {
 	  gameResult = "tie!"
@@ -65,27 +66,16 @@ function checkResult() {
 	} else if (player.pick === "paper") { //if player chooses paper
 	  if  (computer.pick === "rock") { player.score++; gameResult = "Player wins!" }
 	  else if (computer.pick === "scissors") { computer.score++; gameResult = "Computer wins!" }
-	} else if (player.pick === "scissors") { //if player chooses scissors
+	} else { //if player chooses scissors
 	  if  (computer.pick === "paper") { player.score++; gameResult = "Player wins!" }
 	  else if (computer.pick === "rock") { computer.score++; gameResult = "Computer wins!" }
 	}
 
-	if ( (player.score >= 10) || (computer.score >=10) ) {
-	  //log the result
-	  if (player.score > computer.score) {
-	    document.getElementById("roundResult").innerHTML = "Congratulation " + player.name + ", you win the game! :)";
-	  } else {
-	    document.getElementById("roundResult").innerHTML = "Computer wins the game! :(";
-	  }
+	displayRoundResult(gameResult);
+	return ( (player.score >= 10) || (computer.score >=10) ) && checkGameResult();
+}
 
-	  //hide buttons
-
-	  var buttons = document.getElementsByClassName("pick-button");
-	  for(var i = 0; i < buttons.length; i++) {
-	    buttons[i].style.visibility = 'hidden';
-	  };
-	}
-
+function displayRoundResult(gameResult) {
 	document.getElementById("computerPick").innerHTML = computer.pick
 	document.getElementById("playerPick").innerHTML = player.pick
 	document.getElementById("gameResult").innerHTML = gameResult;
@@ -93,4 +83,15 @@ function checkResult() {
 	document.getElementById("computerScore").innerHTML = computer.score;
 }
 
+function checkGameResult() {
+	  //log the result
+		document.getElementById('roundResult').innerHTML = (player.score > computer.score) ?
+			`Congratulation ${player.name}, you win the game! :)` : `Computer wins the game! :(`;
 
+		//hide buttons
+		const buttons = document.getElementsByClassName("pick-button");
+		const buttonsLength = buttons.length;
+		for(var i = 0; i < buttonsLength; i++) {
+			buttons[i].style.visibility = 'hidden';
+		}
+}
